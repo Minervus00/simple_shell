@@ -28,18 +28,16 @@ void add_node_end(list_p **head, const char *dir)
  */
 list_p *list_path(char **env)
 {
-		char *token;
+		char **token;
 		char *path;
+		int i;
 		list_p *head;
 
 		head = NULL;
 		path = _getenv("PATH", env);
 		add_node_end(&head, ".");
-		token = strtok(path, ":");
-		while (token != NULL)
-		{
-				add_node_end(&head, token);
-				token = strtok(NULL, ":");
-		}
+		token = _strtok(path, ":");
+		for (i = 0; token[i]; i++)
+			add_node_end(&head, token[i]);
 		return (head);
 }

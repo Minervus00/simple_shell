@@ -1,9 +1,4 @@
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <string.h>
+#include "shell.h"
 
 /*
 int init_shell(void)
@@ -11,7 +6,7 @@ int init_shell(void)
 
 }
 */
-int main(void)
+int maine(void)
 {
 	size_t size = 10, bytes_read;
 	char *comd, buff[20], *token, **argv;
