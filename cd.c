@@ -38,7 +38,7 @@ int _setenv(char *name, char *value, int overwrite)
 		token = strtok(string, "=");
 		if (!(strcmp(token, name)))
 		{
-			write(STDOUT_FILENO,"name exists !\n", 15);
+		//	write(STDOUT_FILENO,"name exists !\n", 15);
 			if (overwrite != 0)
 			{
 				var = malloc(strlen(name) + strlen(value) + 2);
@@ -51,8 +51,10 @@ int _setenv(char *name, char *value, int overwrite)
 				strcpy(var, name);
 				strcat(var, "=");
 				strcat(var, value);
+			//	write(STDOUT_FILENO,"name exists !\n", 15);
 
 				envi[i] = malloc(strlen(name) + strlen(value) + 1);
+				//write(STDOUT_FILENO,"name exists !\n", 15);
 				if (envi[i] == NULL)
 				{
                     free(envi[i]);
@@ -60,10 +62,16 @@ int _setenv(char *name, char *value, int overwrite)
 					return (-1);
 				}
 				strcpy(envi[i], var);
-                free_loop(environ);
+				free_loop(environ);
+			//	write(STDOUT_FILENO,"name exists !\n", 15);
 				environ = envi;
+				//write(STDOUT_FILENO,"name exists !\n", 15);
+
 				free(var);
+				//write(STDOUT_FILENO,"name exists !\n", 15);
+
 				free(envi[i]);
+				write(STDOUT_FILENO,"name exists !\n", 15);
 			}
 			return (0);
 		}
@@ -87,7 +95,7 @@ int _setenv(char *name, char *value, int overwrite)
 		write(1, "Error_malloc_envi\n", 18);
 		return (-1);
 	}
-    free_loop(environ);
+    	free_loop(environ);
 	envi = environ;
 	envi[i] = malloc(strlen(name) + strlen(value) + 1);
 	if (envi[i] == NULL)
@@ -128,13 +136,13 @@ int _setenvi(char **args, char __attribute__((__unused__)) **front)
 	if (!new_value)
 		return (0);
 	_strcpy(new_value, args[0]);
-	_strcat(new_value, "=");
-	_strcat(new_value, args[1]);
+	new_value = _strcat(new_value, "=");
+	new_value = _strcat(new_value, args[1]);
 
 	env_var = _getenvi(args[0]);
 	if (env_var)
 	{
-		free(*env_var);
+		//free(*env_var);
 		*env_var = new_value;
 		return (0);
 	}
@@ -171,7 +179,7 @@ int _setenvi(char **args, char __attribute__((__unused__)) **front)
  */
 int _cd(char **args)
 {
-	char **dir_info;//, *new_line = "\n";
+	char **dir_info, *new_line = "\n";
 	char *oldpwd = NULL, *pwd = NULL;
 	struct stat dir;
 
@@ -224,14 +232,14 @@ int _cd(char **args)
 	if (!dir_info)
 		return (-1);
 
-	/*dir_info[0] = "OLDPWD";
+	dir_info[0] = "OLDPWD";
 	dir_info[1] = oldpwd;
-	if (_setenv(dir_info[0], dir_info[1], 1) == -1)
+	if (_setenvi(dir_info, dir_info) == -1)
 		return (-1);
-
+	write(STDOUT_FILENO,"name exists !\n", 15);
 	dir_info[0] = "PWD";
 	dir_info[1] = pwd;
-	if (_setenv(dir_info[0], dir_info[1], 1) == -1)
+	if (_setenvi(dir_info, dir_info) == -1)
 		return (-1);
 	if (args[1] && args[1][1] == '-' && args[1][1] != '-')
 	{
@@ -240,6 +248,6 @@ int _cd(char **args)
 	}
 	free(oldpwd);
 	free(pwd);
-	free(dir_info);*/
+	free(dir_info);
 	return (0);
 }

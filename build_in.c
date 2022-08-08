@@ -95,3 +95,4 @@ void built_env(char **commands, char **env, int *exit_st)
 	*exit_st = 0;
 	free_loop(commands);
 }
+
