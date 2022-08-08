@@ -352,8 +352,9 @@ int __putenv(char *string) {
  * @return 0
  */
 int main(int argc, char *argv[]) {
-    fprintf(stdout, "The value for USER environment variable after __putenv call (expected mike): %s\n", __getenv("USER"));
-
+	__setenv("ZABS", "TAPS", 1);
+    fprintf(stdout, "USER = %s\n", __getenv("ZABS"));
+/*
     int unsetEnvironStatus = __unsetenv("USER");
     fprintf(stdout, "The __unsetEnv return value for USER environment variable: %d\n", unsetEnvironStatus);
     fprintf(stdout, "The value of USER after __unsetenv call (expected null): %s\n", __getenv("USER"));
@@ -387,6 +388,6 @@ int main(int argc, char *argv[]) {
     for (ep = environ; *ep != NULL; ep++) {
         sizeEnviron++;
     }
-
+*/
     return 0;
 }
