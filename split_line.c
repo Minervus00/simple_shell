@@ -26,8 +26,8 @@ char **split_line(char *line)
         word_arr = malloc(sizeof(char *) * (len + 1));
         if (word_arr == NULL)
             return (NULL);
-        token_hash = strtok(line, "#");
-        token = strtok(token_hash, TOK_DELIM);
+        token_hash = _strtoki(line, "#");
+        token = _strtoki(token_hash, TOK_DELIM);
         while (token != NULL)
         {
             word_arr[j] = malloc(_strlen(token) + 1);
@@ -37,7 +37,7 @@ char **split_line(char *line)
                 return (NULL);
             }
             _strncpy(word_arr[j], token, _strlen(token) + 1);
-            token = strtok(NULL, TOK_DELIM);
+            token = _strtoki(NULL, TOK_DELIM);
             j++;
         }
         word_arr[j] = NULL;

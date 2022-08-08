@@ -9,7 +9,7 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 #define TOK_DELIM " \t\r\n\v\a"
-
+extern char **environ;
 /**
 * struct list_path - singly linked list
 * @dir: string - (malloc'ed string)
@@ -29,7 +29,6 @@ void execute_line(char *comd, int count,
 		  char **env,int exit_s, int *exit_st);
 char **split_line(char *line);
 list_p *list_path(char **env);
-int _setenv(const char *name, const char *value, int overwrite);
 char *_which(char **commands, char **env);
 void built_exit(char *line, char **arg, int *exit_st, int count);
 void built_env(char **arg, char **env, int *exit_st);
@@ -48,9 +47,13 @@ void free_loop(char **arr);
 void free_list(list_p *head);
 char *_strncpy(char *dest, char *src, int n);
 char *_strcpy(char *dest, const char *src);
+int _strncmp(const char *s1, const char *s2, size_t n);
+
 
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 void assign_lineptr(char **lineptr, size_t *n, char *buffer, size_t b);
 ssize_t _getline(char **lineptr, size_t *n, FILE *stream);
 char **_strtok(char *line, char *delim);
+char *_strtoki(char *str, const char *delimitador);
+int _cd(char **args);
 #endif /* SHELL_H*/

@@ -35,6 +35,11 @@ void execute_line(char *comd, int count,
         built_exit(comd, argv, &exit_s, count);
     else if (_strcmp("env", *argv) == 0)
         built_env(argv, environ, &exit_s);
+    else if (_strcmp("cd", argv[0]) == 0)
+    {
+        write(STDOUT_FILENO,"#######", 8);
+        _cd(argv);
+    }
     else
     {
         r_pid = fork();
