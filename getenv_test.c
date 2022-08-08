@@ -10,11 +10,11 @@ void printenv(void)
 	int i = 0;
 
 	i = 0;
-    while (environ[i] != NULL)
-    {
-        printf("%s\n", environ[i]);
-        i++;
-    }
+	while (environ[i] != NULL)
+	{
+		printf("%s\n", environ[i]);
+		i++;
+	}
 }
 
 /**
@@ -46,19 +46,6 @@ char *_getenv(const char *name)
 void printenv_var(const char *name)
 {
 	printf("%s = %s\n", name, _getenv(name));
-}
-
-int pathdirs(void)
-{
-	char *var = _getenv("PATH"), *token;
-
-	token = strtok(var, ":");
-	while (token)
-	{
-		printf("%s\n", token);
-		token = strtok(NULL, ":");
-	}
-	return (0);
 }
 
 int _setenv(const char *name, const char *value, int overwrite)
