@@ -9,13 +9,13 @@
 *@exit_st: exit status
 *@line: buffer of getline
 */
-void execute_line(char *comd, int count,
+int execute_line(char *comd, int count,
 		  char **env, int exit_s, int *exit_st)
 {
 	pid_t r_pid;
 	int status;
 	char *full_path = NULL, **argv;
-    
+
 
     argv = split_line(comd);
     /*ml = malloc(sizeof(char *) * _strlen(comd) + 1);
@@ -37,8 +37,8 @@ void execute_line(char *comd, int count,
         built_env(argv, environ, &exit_s);
     else if (_strcmp("cd", argv[0]) == 0)
     {
-        write(STDOUT_FILENO,"#######", 8);
-        _cd(argv);
+        write(STDOUT_FILENO,"#######\n", 9);
+        return (_cd(argv));
     }
     else
     {
@@ -47,14 +47,13 @@ void execute_line(char *comd, int count,
             perror("Error:");
         if (r_pid == 0)
         {
-            
+            /*printf("");*/
             full_path = argv[0];
             if (**argv != '/' && _strcmp(argv[0], "..") != 0)
                 full_path = _which(argv, env);
                 
             if (full_path)
             {
-                
                 if (access(full_path, X_OK) == 0)
                     execve(full_path, argv, env);
             }
@@ -62,16 +61,16 @@ void execute_line(char *comd, int count,
             free_loop(argv);
             free(comd);
             exit(*exit_st);
+	   /*return (-1);*/
         }
         else
         {
             wait(&status);
             free_loop(argv);
             *exit_st = WEXITSTATUS(status);
+	    if (*exit_st != 0)
+		    return (-1);
         }
     }
+    return (0);
 }
-
-
-        
-			

@@ -1,41 +1,45 @@
-#include <shell.h>
+#include "shell.h"
 
+/**
+ * func_separator -manage ; || &&
+ * @comd - the whole command
+ *
+ * Return: 0 if there are no separators, 1 otherwise
+ */
 int func_separator(char *comd)
 {
-	char *tok, sepa[3][2] = {";", "||", "&&"}, comds[10][100];
-	int i = 0, j = 0, h = 0;
+	char *tok, *sepa[] = {";", "||", "&&"};
+	int i, j = 0, h = 0;
 
-	for (i = 0; sepa[i]; i++)
+	for (i = 0; i < 3; i++)
 	{
-		tok = strtok(comd, sepa[i]);
-		if (tok)
+		if (_strstr(comd, sepa[i]))
 		{
+			tok = strtok(comd, sepa[i]);
 			while (tok)
 			{
 				if (i == 0)
 					execute_line(tok, 1, environ, h, &h);
-				else if (i == 2)
+				else if (i == 1)
 				{
-					/*Suppose que execute_line return 0 en cas de success
-					  D'où en cas de suucès on arrête l'exécution*/
-					if (!execute_line(tok, 1, environ, h, &h));
+					/*Execute_line return 0 en cas de success
+					  D'où en cas de succès on arrête l'exécution*/
+					if (execute_line(tok, 1, environ, h, &h) == 0)
 						return (1);
 				}
 				else
 				{
 					/*En cas d'erreur (execute_line return != 0) on arrête l'exécution*/
-					if(execute_line(tok, environ, h, &h))
+					if(execute_line(tok, 1, environ, h, &h))
 						return (1);
 				}
 
-
-				tok= strtok(NULL, sepa[i]);
+				tok = strtok(NULL, sepa[i]);
 				j++;
 			}
-			if (i == 0)
-				return (1);
-			break;
+			return (1);
 		}
 	}
+	/*printf("func_nooo_sepa\n");*/
 	return (0);
-}	
+}

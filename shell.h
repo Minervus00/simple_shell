@@ -25,8 +25,7 @@ typedef struct list_path
 } list_p;
 
 /*Functions of the shell*/
-void execute_line(char *comd, int count,
-		  char **env,int exit_s, int *exit_st);
+int execute_line(char *comd, int count, char **env, int exit_s, int *exit_st);
 char **split_line(char *line);
 list_p *list_path(char **env);
 char *_which(char **commands, char **env);
@@ -36,6 +35,7 @@ char *_getenv(const char *name, char **env);
 void _error(char **argv, char *first, int count, int **exit_st);
 int special_case(char *line, ssize_t line_len, int *exit_st);
 void print_num(int count);
+int func_separator(char *comd);
 
 /*useful functions*/
 int _strlen(char *s);
@@ -48,7 +48,7 @@ void free_list(list_p *head);
 char *_strncpy(char *dest, char *src, int n);
 char *_strcpy(char *dest, const char *src);
 int _strncmp(const char *s1, const char *s2, size_t n);
-
+char *_strstr(char *hay, char *need);
 
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 void assign_lineptr(char **lineptr, size_t *n, char *buffer, size_t b);

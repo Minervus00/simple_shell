@@ -14,6 +14,35 @@ int _strlen(char *s)
 		return (len);
 }
 /**
+ * _strtr - clone of strstr
+ * @haystack: string to be scanned
+ * @needle: small string tobe searched in haystack
+ *
+ * Return: pointer to the first occurrence in haystack or NULL
+ */
+char *_strstr(char *hay, char *need)
+{
+	int i, j, lh = _strlen(hay), ln = _strlen(need);
+
+	if (ln > lh)
+		return (NULL);
+
+	for (i = 0; i < lh; i++)
+	{
+		if ((int) hay[i] == (int) need[0])
+		{
+			for (j = 1; j < ln; j++)
+			{
+				if ((int) hay[i + j] != (int) need[j])
+					break;
+			}
+			if (j == ln)
+				return (hay + i);
+		}
+	}
+	return (NULL);
+}
+/**
  *_strcat - concatenates two strings
  *@s1: point to string
  *@s2: point to string

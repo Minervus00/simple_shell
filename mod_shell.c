@@ -15,7 +15,7 @@ int main()
 	comd = malloc(size);
 	if (comd == NULL)
 	{
-		puts("Error !");
+		write(1, "Error !\n", 8);
 		return (1);
 	}
 
@@ -26,8 +26,10 @@ int main()
 			printf("ERROR_getline !\n");
 
 		else
-			execute_line(comd, count, environ, exit_st, &exit_st);
-			
+		{
+			if (!func_separator(comd))
+				execute_line(comd, count, environ, exit_st, &exit_st);
+		}
 		return (0);
 	}
 		
@@ -40,7 +42,10 @@ int main()
 			printf("ERROR_getline !\n");
 
 		else
-			execute_line(comd, count, environ, exit_st, &exit_st);
+		{
+			if(!func_separator(comd))
+				execute_line(comd, count, environ, exit_st, &exit_st);
+		}
 	}
 	free(comd);
 	return (0);
