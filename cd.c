@@ -108,7 +108,6 @@ int _cd(char **args)
 			{
 				if (_getenvi("OLDPWD") != NULL)
                 {
-                    write(STDOUT_FILENO, "€##", 6);
 					(chdir(*_getenvi("OLDPWD") + 7));
                 }
 			}
