@@ -13,11 +13,10 @@ char *_getenv(const char *name, char **env)
 
 	if (env == NULL)
 		return (NULL);
-
 	for (i = 0; env[i]; i++)
 	{
 		comp = _strtok(env[i], "=")[0];
-		if (strcmp(comp, name) == 0)
+		if (_strcmpi(comp, name) == 0)
 		{
 			return (_strtok(_strtok(env[i], "=")[1], "\n")[0]);
 		}

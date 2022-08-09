@@ -1,9 +1,19 @@
 #include "shell.h"
 
+
+/**
+ * print_error - print an error
+ */
 void print_error(void)
 {
 	write(1, "./shell: No such file or directory\n", 35);
 }
+
+/**
+ * main - the main function
+ * 
+ * @return int 
+ */
 
 int main()
 {

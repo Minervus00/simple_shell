@@ -18,18 +18,7 @@ int execute_line(char *comd, int count,
 
 
     argv = split_line(comd);
-    /*ml = malloc(sizeof(char *) * _strlen(comd) + 1);
-    _strcpy(ml, comd);
-    dml = _strtok(ml,TOK_DELIM);
-    for(i = 0; dml[i]; i++)
-    {   
-        printf("%s#\n", dml[i]);
-    }
-    printf("##############\n");
-    for(i = 0; argv[i]; i++)
-    {   
-        printf("%s#\n", argv[i]);
-    }*/
+
     count++;
     if (_strcmp("exit", *argv) == 0)
         built_exit(comd, argv, &exit_s, count);
@@ -37,7 +26,6 @@ int execute_line(char *comd, int count,
         built_env(argv, environ, &exit_s);
     else if (_strcmp("cd", argv[0]) == 0)
     {
-        write(STDOUT_FILENO,"#######\n", 9);
         return (_cd(argv));
     }
     else
@@ -47,7 +35,6 @@ int execute_line(char *comd, int count,
             perror("Error:");
         if (r_pid == 0)
         {
-            /*printf("");*/
             full_path = argv[0];
             if (**argv != '/' && _strcmp(argv[0], "..") != 0)
                 full_path = _which(argv, env);
@@ -61,7 +48,6 @@ int execute_line(char *comd, int count,
             free_loop(argv);
             free(comd);
             exit(*exit_st);
-	   /*return (-1);*/
         }
         else
         {

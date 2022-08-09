@@ -49,6 +49,7 @@ char *_strncpy(char *dest, char *src, int n);
 char *_strcpy(char *dest, const char *src);
 int _strncmp(const char *s1, const char *s2, size_t n);
 char *_strstr(char *hay, char *need);
+int _strcmpi(char *s1, const char *s2);
 
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
 void assign_lineptr(char **lineptr, size_t *n, char *buffer, size_t b);

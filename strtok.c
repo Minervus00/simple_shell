@@ -104,7 +104,7 @@ char **_strtok(char *line, char *delim)
 }
 
 /**
-  * _strtok - tokenizes a string
+  * _strtoki - tokenizes a string
   * @str: string to tokenize
   * @delimitador: string that contains the delimitadoriters
   * Return: pointer to position in string of a null terminated word.

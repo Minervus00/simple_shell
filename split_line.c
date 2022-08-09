@@ -14,11 +14,9 @@ char **split_line(char *line)
 	char **word_arr;
 	int len;
 
-    
 	len = _strlen(line);
     if (line == NULL)
     {
-        printf("########");
         return (NULL);
     }
     else
