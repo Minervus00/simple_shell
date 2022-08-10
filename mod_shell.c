@@ -10,6 +10,13 @@ void print_error(void)
 }
 
 /**
+ * signal_handler - handle signals
+ */
+void signal_handler(int signal __attribute__((unused)))
+{
+	write(STDOUT_FILENO, "\n$ ", 3);
+}
+/**
  * main - the main function
  * Return: int
  */
@@ -20,6 +27,7 @@ int main(void)
 	char *comd;
 	int exit_st = 0;
 
+	signal(SIGINT, signal_handler);
 	comd = malloc(size);
 	if (comd == NULL)
 	{
