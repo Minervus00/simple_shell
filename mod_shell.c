@@ -52,7 +52,7 @@ int main(void)
 	while (1)
 	{
 		if (isatty(STDIN_FILENO) == 1)
-			write(STDOUT_FILENO, "#cisfun$ ", 10);
+			write(STDOUT_FILENO, "$ ", 10);
 		bytes_read = _getline(&comd, &size, stdin);
 		if (bytes_read == (unsigned int long)-1)
 			printf("ERROR_getline !\n");
@@ -61,6 +61,7 @@ int main(void)
 			if (!func_separator(comd))
 				execute_line(comd, count, environ, &exit_st);
 		}
+		fflush(stdin);
 	}
 	free(comd);
 	return (0);
