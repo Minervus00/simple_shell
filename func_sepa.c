@@ -15,7 +15,7 @@ int func_separator(char *comd)
 	{
 		if (_strstr(comd, sepa[i]))
 		{
-			tok = strtok(comd, sepa[i]);
+			tok = _strtoki(comd, sepa[i]);
 			while (tok)
 			{
 				if (i == 0)
@@ -34,7 +34,7 @@ int func_separator(char *comd)
 						return (1);
 				}
 
-				tok = strtok(NULL, sepa[i]);
+				tok = _strtoki(NULL, sepa[i]);
 				j++;
 			}
 			return (1);
