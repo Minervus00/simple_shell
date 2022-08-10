@@ -35,6 +35,7 @@ char *_getenv(const char *name, char **env);
 void _error(char **argv, char *first, int count, int **exit_st);
 void print_num(int count);
 int func_separator(char **av, char *comd);
+int special_case(char *line, ssize_t line_len, int *exit_st);
 
 /*useful functions*/
 int _strlen(char *s);

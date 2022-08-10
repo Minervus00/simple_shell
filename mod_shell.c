@@ -23,7 +23,7 @@ void signal_handler(int signal __attribute__((unused)))
 
 int main(int ac, char **av)
 {
-	size_t size = 10, bytes_read, count = 0;
+	size_t size = 10, bytes_read = 0, count = 0;
 	char *comd;
 	int exit_st = 0;
 	(void)ac;
@@ -41,7 +41,8 @@ int main(int ac, char **av)
 		bytes_read = _getline(&comd, &size, stdin);
 		if (bytes_read == (unsigned int long)-1)
 			printf("ERROR_getline !\n");
-
+		if (special_case(comd, bytes_read, &exit_st) == 3)
+			;
 		else
 		{
 			if (!func_separator(av, comd))
@@ -57,6 +58,8 @@ int main(int ac, char **av)
 		bytes_read = _getline(&comd, &size, stdin);
 		if (bytes_read == (unsigned int long)-1)
 			printf("ERROR_getline !\n");
+		if (special_case(comd, bytes_read, &exit_st) == 3)
+			continue;
 		else
 		{
 			if (!func_separator(av,comd))
