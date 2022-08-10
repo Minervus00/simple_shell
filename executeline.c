@@ -10,10 +10,11 @@
 *Return: int
 */
 int execute_line(char *comd, int count,
-		  char **env, int exit_s, int *exit_st)
+		  char **env, int *exit_st)
 {
 	pid_t r_pid;
 	int status;
+    int exit_s = 0;
 	char *full_path = NULL, **argv;
 
 	argv = split_line(comd);

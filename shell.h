@@ -25,7 +25,7 @@ typedef struct list_path
 } list_p;
 
 /*Functions of the shell*/
-int execute_line(char *comd, int count, char **env, int exit_s, int *exit_st);
+int execute_line(char *comd, int count, char **env, int *exit_st);
 char **split_line(char *line);
 list_p *list_path(char **env);
 char *_which(char **commands, char **env);

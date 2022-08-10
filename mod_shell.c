@@ -44,7 +44,7 @@ int main(void)
 		else
 		{
 			if (!func_separator(comd))
-				execute_line(comd, count, environ, exit_st, &exit_st);
+				execute_line(comd, count, environ, &exit_st);
 		}
 		return (0);
 	}
@@ -59,7 +59,7 @@ int main(void)
 		else
 		{
 			if (!func_separator(comd))
-				execute_line(comd, count, environ, exit_st, &exit_st);
+				execute_line(comd, count, environ, &exit_st);
 		}
 	}
 	free(comd);
