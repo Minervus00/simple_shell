@@ -15,7 +15,7 @@ int _strlen(char *s)
 }
 /**
  * _strtr - clone of strstr
- * @hays: string to be scanned
+ * @hay: string to be scanned
  * @need: small string tobe searched in haystack
  *
  * Return: pointer to the first occurrence in haystack or NULL
