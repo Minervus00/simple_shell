@@ -15,8 +15,8 @@ int _strlen(char *s)
 }
 /**
  * _strtr - clone of strstr
- * @haystack: string to be scanned
- * @needle: small string tobe searched in haystack
+ * @hays: string to be scanned
+ * @need: small string tobe searched in haystack
  *
  * Return: pointer to the first occurrence in haystack or NULL
  */
@@ -50,29 +50,29 @@ char *_strstr(char *hay, char *need)
  */
 char *_strcat(char *s1, char *s2)
 {
-		char *cat;
-		int i, j, k;
+	char *cat;
+	int i, j, k;
 
-		for (i = 0; s1 && s1[i]; ++i)
-				;
-		for (j = 0; s2 && s2[j]; ++j)
-				;
-		cat = (char *)malloc((i + j + 1) * sizeof(char));
-		if (cat == NULL)
-				return (NULL);
-		k = 0;
-		for (i = 0; s1 && s1[i]; ++i)
-		{
-				cat[k] = s1[i];
-				++k;
-		}
-		for (j = 0; s2 && s2[j]; ++j)
-		{
-				cat[k] = s2[j];
-				++k;
-		}
-		cat[k] = '\0';
-		return (cat);
+	for (i = 0; s1 && s1[i]; ++i)
+		;
+	for (j = 0; s2 && s2[j]; ++j)
+		;
+	cat = (char *)malloc((i + j + 1) * sizeof(char));
+	if (cat == NULL)
+		return (NULL);
+	k = 0;
+	for (i = 0; s1 && s1[i]; ++i)
+	{
+		cat[k] = s1[i];
+		++k;
+	}
+	for (j = 0; s2 && s2[j]; ++j)
+	{
+		cat[k] = s2[j];
+		++k;
+	}
+	cat[k] = '\0';
+	return (cat);
 }
 /**
 *_strdup - returns a pointer to a newly allocated space in memory
@@ -81,19 +81,19 @@ char *_strcat(char *s1, char *s2)
 */
 char *_strdup(char *str)
 {
-		int i, j;
-		char *dup;
+	int i, j;
+	char *dup;
 
-		if (str == NULL)
-				return (NULL);
-		for (i = 0; str[i]; i++)
-				;
-		dup = (char *)malloc((i + 1) * sizeof(char));
-		if (dup == NULL)
-				return (dup);
-		for (j = 0; j <= i; ++j)
-				dup[j] = str[j];
+	if (str == NULL)
+		return (NULL);
+	for (i = 0; str[i]; i++)
+		;
+	dup = (char *)malloc((i + 1) * sizeof(char));
+	if (dup == NULL)
 		return (dup);
+	for (j = 0; j <= i; ++j)
+		dup[j] = str[j];
+	return (dup);
 }
 /**
 * _strcmp - compares two strings
@@ -103,13 +103,13 @@ char *_strdup(char *str)
 */
 int _strcmp(char *s1, char *s2)
 {
-		while (1)
-		{
-				if (*s1 != *s2)
-						return (*s1 - *s2);
-				if (*s1 == '\0')
-						return (0);
-				s1++;
-				s2++;
-		}
+	while (1)
+	{
+		if (*s1 != *s2)
+			return (*s1 - *s2);
+		if (*s1 == '\0')
+			return (0);
+		s1++;
+		s2++;
+	}
 }

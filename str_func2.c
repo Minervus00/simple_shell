@@ -9,13 +9,13 @@
 */
 char *_strncpy(char *dest, char *src, int n)
 {
-		int i;
+	int i;
 
-		for (i = 0; (i < n) && (*(src + i) != '\0'); i++)
-				*(dest + i) = *(src + i);
-		for (; i < n; i++)
-				*(dest + i) = '\0';
-		return (dest);
+	for (i = 0; (i < n) && (*(src + i) != '\0'); i++)
+		*(dest + i) = *(src + i);
+	for (; i < n; i++)
+		*(dest + i) = '\0';
+	return (dest);
 }
 
 /**
@@ -71,13 +71,13 @@ int _strncmp(const char *s1, const char *s2, size_t n)
 */
 int _strcmpi(char *s1, const char *s2)
 {
-		while (1)
-		{
-				if (*s1 != *s2)
-						return (*s1 - *s2);
-				if (*s1 == '\0')
-						return (0);
-				s1++;
-				s2++;
-		}
+	while (1)
+	{
+		if (*s1 != *s2)
+			return (*s1 - *s2);
+		if (*s1 == '\0')
+			return (0);
+		s1++;
+		s2++;
+	}
 }

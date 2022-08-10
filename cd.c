@@ -1,5 +1,10 @@
 #include "shell.h"
 
+/**
+ * _strleni - length of string
+ * @s: string
+ * Return: length
+ */
 int _strleni(const char *s)
 {
 	int length = 0;
@@ -11,6 +16,11 @@ int _strleni(const char *s)
 	return (length);
 }
 
+/**
+ * _getenvi - get value of environment variable
+ * @var: name of variable
+ * Return: Value
+ */
 char **_getenvi(const char *var)
 {
 	int index, len;
@@ -28,9 +38,9 @@ char **_getenvi(const char *var)
 /**
  * _setenv - Changes or adds an environmental variable to the PATH.
  * @args: An array of arguments passed to the shell.
- * @front: A double pointer to the beginning of args.
- * Description: args[1] is the name of the new or existing PATH variable.
- *              args[2] is the value to set the new or changed variable to.
+ * @front: front
+ * Description: args[0] is the name of the new or existing PATH variable.
+ *              args[1] is the value to set the new or changed variable to.
  *
  * Return: If an error occurs - -1.
  *         Otherwise - 0.
@@ -54,7 +64,6 @@ int _setenv(char **args, char __attribute__((__unused__)) **front)
 	env_var = _getenvi(args[0]);
 	if (env_var)
 	{
-		//free(*env_var);
 		*env_var = new_value;
 		return (0);
 	}
@@ -83,8 +92,6 @@ int _setenv(char **args, char __attribute__((__unused__)) **front)
 /**
  * _cd - Changes the current directory of the shellby process.
  * @args: An array of arguments.
- * @front: A double pointer to the beginning of args.
- *
  * Return: If the given string is not a directory - 2.
  *         If an error occurs - -1.
  *         Otherwise - 0.
@@ -98,7 +105,6 @@ int _cd(char **args)
 	oldpwd = getcwd(oldpwd, 0);
 	if (!oldpwd)
 		return (-1);
-
 	if (args[1])
 	{
 		if (*(args[1]) == '-' || _strcmp(args[1], "--") == 0)
@@ -107,9 +113,9 @@ int _cd(char **args)
 					args[1][1] == '\0')
 			{
 				if (_getenvi("OLDPWD") != NULL)
-                {
+				{
 					(chdir(*_getenvi("OLDPWD") + 7));
-                }
+				}
 			}
 			else
 			{
@@ -134,20 +140,16 @@ int _cd(char **args)
 		if (_getenvi("HOME") != NULL)
 			chdir(*(_getenvi("HOME")) + 5);
 	}
-
 	pwd = getcwd(pwd, 0);
 	if (!pwd)
 		return (-1);
-
 	dir_info = malloc(sizeof(char *) * 2);
 	if (!dir_info)
 		return (-1);
-
 	dir_info[0] = "OLDPWD";
 	dir_info[1] = oldpwd;
 	if (_setenv(dir_info, dir_info) == -1)
 		return (-1);
-
 	dir_info[0] = "PWD";
 	dir_info[1] = pwd;
 	if (_setenv(dir_info, dir_info) == -1)

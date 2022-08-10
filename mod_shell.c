@@ -11,16 +11,14 @@ void print_error(void)
 
 /**
  * main - the main function
- * 
- * @return int 
+ * Return: int
  */
 
-int main()
+int main(void)
 {
 	size_t size = 10, bytes_read, count = 0;
 	char *comd;
 	int exit_st = 0;
-	
 
 	comd = malloc(size);
 	if (comd == NULL)
@@ -32,7 +30,7 @@ int main()
 	if (!isatty(STDIN_FILENO))
 	{
 		bytes_read = _getline(&comd, &size, stdin);
-		if (bytes_read == (long unsigned int)-1)
+		if (bytes_read == (unsigned int long)-1)
 			printf("ERROR_getline !\n");
 
 		else
@@ -42,18 +40,17 @@ int main()
 		}
 		return (0);
 	}
-		
+
 	while (1)
 	{
 		if (isatty(STDIN_FILENO) == 1)
 			write(STDOUT_FILENO, "#cisfun$ ", 10);
 		bytes_read = _getline(&comd, &size, stdin);
-		if (bytes_read == (long unsigned int)-1)
+		if (bytes_read == (unsigned int long)-1)
 			printf("ERROR_getline !\n");
-
 		else
 		{
-			if(!func_separator(comd))
+			if (!func_separator(comd))
 				execute_line(comd, count, environ, exit_st, &exit_st);
 		}
 	}

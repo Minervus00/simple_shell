@@ -23,3 +23,4 @@ char *_getenv(const char *name, char **env)
 	}
 	return (NULL);
 }
+

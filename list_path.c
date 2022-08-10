@@ -7,19 +7,19 @@
  */
 void add_node_end(list_p **head, const char *dir)
 {
-		list_p *last = *head;
-		list_p *new = malloc(sizeof(list_p));
+	list_p *last = *head;
+	list_p *new = malloc(sizeof(list_p));
 
-		new->next = NULL;
-		new->dir = _strdup((char *)dir);
-		if (last)
-		{
-				while (last->next)
-				last = last->next;
-				last->next = new;
-		}
-		else
-				*head = new;
+	new->next = NULL;
+	new->dir = _strdup((char *)dir);
+	if (last)
+	{
+		while (last->next)
+			last = last->next;
+		last->next = new;
+	}
+	else
+		*head = new;
 }
 /**
  *list_path - function that builds a linked list of the PATH directories
