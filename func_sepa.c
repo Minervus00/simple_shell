@@ -6,7 +6,7 @@
  *
  * Return: 0 if there are no separators, 1 otherwise
  */
-int func_separator(char *comd)
+int func_separator(char **av, char *comd)
 {
 	char **tok, *sepa[] = {";", "||", "&&"};
 	int i, j = 0, h = 0;
@@ -19,20 +19,20 @@ int func_separator(char *comd)
 			while (tok[0])
 			{
 				if (i == 0)
-					execute_line(tok[0], 1, environ, &h);
+					execute_line(av, tok[0], 1, environ, &h);
 				else if (i == 1)
 				{
 					 /**
 					  * Execute_line return 0 en cas de success
 					  * D'où en cas de succès on arrête l'exécution
 					  */
-					if (execute_line(tok[0], 1, environ, &h) == 0)
+					if (execute_line(av, tok[0], 1, environ, &h) == 0)
 						return (1);
 				}
 				else
 				{
 					/*En cas d'erreur (execute_line return != 0) on arrête l'exécution*/
-					if (execute_line(tok[0], 1, environ, &h))
+					if (execute_line(av, tok[0], 1, environ, &h))
 						return (1);
 				}
 				tok++;

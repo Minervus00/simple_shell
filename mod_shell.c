@@ -21,11 +21,12 @@ void signal_handler(int signal __attribute__((unused)))
  * Return: int
  */
 
-int main(void)
+int main(int ac, char **av)
 {
 	size_t size = 10, bytes_read, count = 0;
 	char *comd;
 	int exit_st = 0;
+	(void)ac;
 
 	signal(SIGINT, signal_handler);
 	comd = malloc(size);
@@ -43,8 +44,8 @@ int main(void)
 
 		else
 		{
-			if (!func_separator(comd))
-				execute_line(comd, count, environ, &exit_st);
+			if (!func_separator(av, comd))
+				execute_line(av,comd, count, environ, &exit_st);
 		}
 		return (0);
 	}
@@ -58,8 +59,8 @@ int main(void)
 			printf("ERROR_getline !\n");
 		else
 		{
-			if (!func_separator(comd))
-				execute_line(comd, count, environ, &exit_st);
+			if (!func_separator(av,comd))
+				execute_line(av,comd, count, environ, &exit_st);
 		}
 		fflush(stdin);
 	}

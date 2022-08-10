@@ -6,10 +6,9 @@
 *@count: count of commands that were run
 *@env: the environment
 *@exit_st: exit status
-*@exit_s: exit
 *Return: int
 */
-int execute_line(char *comd, int count,
+int execute_line(char **av, char *comd, int count,
 		  char **env, int *exit_st)
 {
 	pid_t r_pid;
@@ -42,7 +41,7 @@ int execute_line(char *comd, int count,
 				if (access(full_path, X_OK) == 0)
 					execve(full_path, argv, env);
 			}
-			_error(argv, argv[0], count, &exit_st);
+			_error(av, argv[0], count, &exit_st);
 			free_loop(argv);
 			free(comd);
 			exit(*exit_st);
