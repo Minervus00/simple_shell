@@ -154,7 +154,7 @@ int _cd(char **args)
 	dir_info[1] = pwd;
 	if (_setenv(dir_info, dir_info) == -1)
 		return (-1);
-	if (args[1] && args[1][1] == '-' && args[1][1] != '-')
+	if (args[1] && args[1][0] == '-' && args[1][1] != '-')
 	{
 		write(STDOUT_FILENO, pwd, _strlen(pwd));
 		write(STDOUT_FILENO, new_line, 1);
