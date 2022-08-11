@@ -23,17 +23,17 @@ void signal_handler(int signal __attribute__((unused)))
 
 int main(int ac, char **av)
 {
-	size_t size = 1048576, bytes_read = 0, count = 0;
+	size_t size = 0, bytes_read = 0, count = 0;
 	char *comd = NULL;
 	int exit_st = 0;
 	(void)ac;
 
-	comd = malloc(size);
+	/*comd = malloc(size);
 	if (comd == NULL)
 	{
 		write(1, "Error !\n", 8);
 		return (1);
-	}
+	}*/
 
 	while (1)
 	{
