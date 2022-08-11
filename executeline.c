@@ -41,7 +41,7 @@ int execute_line(char **av, char *comd, int count,
 				if (access(full_path, X_OK) == 0)
 					if (execve(full_path, argv, env) == -1)
                     {
-                        if if(WIFEXITED(status))
+                        if(WIFEXITED(status))
                             *exit_st = WEXITSTATUS(status);
                     }
 			}
