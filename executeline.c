@@ -39,7 +39,8 @@ int execute_line(char **av, char *comd, int count,
 			if (full_path)
 			{
 				if (access(full_path, X_OK) == 0)
-					execve(full_path, argv, env);
+					if (execve(full_path, argv, env) == -1)
+                        *exit_st = 2;
 			}
 			_error(av, argv[0], count, &exit_st);
             free(full_path);
