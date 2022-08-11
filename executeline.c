@@ -52,8 +52,11 @@ int execute_line(char **av, char *comd, int count,
 			wait(&status);
 			free_loop(argv);
 			*exit_st = WEXITSTATUS(status);
+            if (*exit_st == 2)
+                exit(2);
 			if (*exit_st != 0)
 				return (-1);
+            
 		}
 	}
 	return (0);
