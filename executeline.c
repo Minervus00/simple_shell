@@ -45,13 +45,14 @@ int execute_line(char **av, char *comd, int count,
             free(full_path);
 			free_loop(argv);
 			free(comd);
-			exit(2);
+			exit(*exit_st);
 		}
 		else
 		{
 			wait(&status);
 			free_loop(argv);
-			*exit_st = WEXITSTATUS(status);
+            if (WIFEXITED(status))
+                *exit_st = WEXITSTATUS(status);
 			if (*exit_st != 0)
 				return (-1);
 		}
