@@ -89,7 +89,7 @@ int _setenv(char **args, char __attribute__((__unused__)) **front)
 	if (env_var)
 	{
 		*env_var = new_value;
-        free(new_value);
+        free(new_value)
 		return (0);
 	}
 	for (size = 0; environ[size]; size++)
@@ -186,13 +186,9 @@ int _cd(char **args)
 		write(STDOUT_FILENO, pwd, _strlen(pwd));
 		write(STDOUT_FILENO, new_line, 1);
 	}
-    else
-    {
-		write(STDOUT_FILENO, pwd, _strlen(pwd));
-		write(STDOUT_FILENO, new_line, 1);
-	}
+
 	free(oldpwd);
 	free(pwd);
-	free(dir_info);
+	free_loop(dir_info);
 	return (0);
 }
