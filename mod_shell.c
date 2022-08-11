@@ -53,5 +53,5 @@ int main(int ac, char **av)
 		fflush(stdin);
 	}
 	free(comd);
-	return (2);
+	return (0);
 }
