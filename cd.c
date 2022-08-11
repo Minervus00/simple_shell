@@ -159,6 +159,11 @@ int _cd(char **args)
 		write(STDOUT_FILENO, pwd, _strlen(pwd));
 		write(STDOUT_FILENO, new_line, 1);
 	}
+    else
+    {
+		write(STDOUT_FILENO, pwd, _strlen(pwd));
+		write(STDOUT_FILENO, new_line, 1);
+	}
 	free(oldpwd);
 	free(pwd);
 	free(dir_info);
