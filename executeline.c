@@ -39,11 +39,7 @@ int execute_line(char **av, char *comd, int count,
 			if (full_path)
 			{
 				if (access(full_path, X_OK) == 0)
-					if (execve(full_path, argv, env) == -1)
-                    {
-                        if(WIFEXITED(status))
-                            *exit_st = WEXITSTATUS(status);
-                    }
+					execve(full_path, argv, env);
 			}
 			_error(av, argv[0], count, &exit_st);
             free(full_path);
