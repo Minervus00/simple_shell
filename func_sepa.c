@@ -8,7 +8,7 @@
  */
 int func_separator(char **av, char *comd)
 {
-	char **tok, *sepa[] = {";", "||", "&&"};
+	char **tok = NULL, *sepa[] = {";", "||", "&&"};
 	int i, j = 0, h = 0;
 
 	for (i = 0; i < 3; i++)
@@ -27,17 +27,24 @@ int func_separator(char **av, char *comd)
 					  * D'où en cas de succès on arrête l'exécution
 					  */
 					if (execute_line(av, tok[0], 1, environ, &h) == 0)
+					{
+						free_loop(tok);
 						return (1);
+					}
 				}
 				else
 				{
 					/*En cas d'erreur (execute_line return != 0) on arrête l'exécution*/
 					if (execute_line(av, tok[0], 1, environ, &h))
+					{
+						free_loop(tok);
 						return (1);
+					}
 				}
 				tok++;
 				j++;
 			}
+			free_loop(tok);
 			return (1);
 		}
 	}
