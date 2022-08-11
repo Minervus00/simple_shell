@@ -41,8 +41,7 @@ int execute_line(char **av, char *comd, int count,
 				if (access(full_path, X_OK) == 0)
 					if (execve(full_path, argv, env) == -1)
                     {
-                        *exit_st = 2;
-                        status = 2;
+                        exit(2);
                     }
 			}
 			_error(av, argv[0], count, &exit_st);
