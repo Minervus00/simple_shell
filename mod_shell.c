@@ -23,7 +23,7 @@ void signal_handler(int signal __attribute__((unused)))
 
 int main(int ac, char **av)
 {
-	size_t size = 10, bytes_read = 0, count = 0;
+	size_t size = 1024, bytes_read = 0, count = 0;
 	char *comd = NULL;
 	int exit_st = 0;
 	(void)ac;
