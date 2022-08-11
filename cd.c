@@ -36,6 +36,30 @@ char **_getenvi(const char *var)
 }
 
 /**
+ * _strcat - Concantenates two strings.
+ * @dest: Pointer to destination string.
+ * @src: Pointer to source string.
+ *
+ * Return: Pointer to destination string.
+ */
+char *_strcati(char *dest, const char *src)
+{
+	char *destTemp;
+	const char *srcTemp;
+
+	destTemp = dest;
+	srcTemp =  src;
+
+	while (*destTemp != '\0')
+		destTemp++;
+
+	while (*srcTemp != '\0')
+		*destTemp++ = *srcTemp++;
+	*destTemp = '\0';
+	return (dest);
+}
+
+/**
  * _setenv - Changes or adds an environmental variable to the PATH.
  * @args: An array of arguments passed to the shell.
  * @front: front
@@ -58,13 +82,14 @@ int _setenv(char **args, char __attribute__((__unused__)) **front)
 	if (!new_value)
 		return (0);
 	_strcpy(new_value, args[0]);
-	new_value = _strcat(new_value, "=");
-	new_value = _strcat(new_value, args[1]);
+	_strcati(new_value, "=");
+	_strcati(new_value, args[1]);
 
 	env_var = _getenvi(args[0]);
 	if (env_var)
 	{
 		*env_var = new_value;
+        free(new_value);
 		return (0);
 	}
 	for (size = 0; environ[size]; size++)
@@ -84,6 +109,8 @@ int _setenv(char **args, char __attribute__((__unused__)) **front)
 	environ = new_environ;
 	environ[index] = new_value;
 	environ[index + 1] = NULL;
+    free(new_value);
+    free_loop(new_environ);
 
 	return (0);
 }
