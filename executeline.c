@@ -42,6 +42,7 @@ int execute_line(char **av, char *comd, int count,
 					execve(full_path, argv, env);
 			}
 			_error(av, argv[0], count, &exit_st);
+            free(full_path);
 			free_loop(argv);
 			free(comd);
 			exit(*exit_st);
