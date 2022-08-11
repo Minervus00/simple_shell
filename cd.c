@@ -89,7 +89,7 @@ int _setenv(char **args, char __attribute__((__unused__)) **front)
 	if (env_var)
 	{
 		*env_var = new_value;
-        free(new_value)
+        free(new_value);
 		return (0);
 	}
 	for (size = 0; environ[size]; size++)
