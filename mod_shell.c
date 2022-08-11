@@ -56,8 +56,8 @@ int main(int ac, char **av)
 		if (isatty(STDIN_FILENO) == 1)
 			write(STDOUT_FILENO, "$ ", 10);
 		bytes_read = _getline(&comd, &size, stdin);
-		if (bytes_read == (unsigned int long)-1)
-			printf("ERROR_getline !\n");
+		/*if (bytes_read == (unsigned int long)-1)
+			printf("ERROR_getline !\n");*/
 		if (special_case(comd, bytes_read, &exit_st) == 3)
 			continue;
 		else
