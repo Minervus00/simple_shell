@@ -51,8 +51,7 @@ int execute_line(char **av, char *comd, int count,
 		{
 			wait(&status);
 			free_loop(argv);
-            if (WIFEXITED(status))
-                *exit_st = WEXITSTATUS(status);
+            *exit_st = WEXITSTATUS(status);
 			if (*exit_st != 0)
 				return (-1);
 		}
