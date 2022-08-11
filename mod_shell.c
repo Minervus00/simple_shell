@@ -36,7 +36,7 @@ int main(int ac, char **av)
 		return (1);
 	}
 
-	if (!isatty(STDIN_FILENO))
+	if (isatty(STDIN_FILENO) == 3)
 	{
 		bytes_read = _getline(&comd, &size, stdin);
 		if (bytes_read == (unsigned int long)-1)
