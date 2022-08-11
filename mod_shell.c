@@ -10,16 +10,25 @@ void print_error(void)
 }
 
 /**
+ * signal_handler - handle signals
+ */
+void signal_handler(int signal __attribute__((unused)))
+{
+	write(STDOUT_FILENO, "\n$ ", 3);
+}
+/**
  * main - the main function
  * Return: int
  */
 
-int main(void)
+int main(int ac, char **av)
 {
-	size_t size = 10, bytes_read, count = 0;
+	size_t size = 10, bytes_read = 0, count = 0;
 	char *comd;
 	int exit_st = 0;
+	(void)ac;
 
+	signal(SIGINT, signal_handler);
 	comd = malloc(size);
 	if (comd == NULL)
 	{
@@ -27,16 +36,17 @@ int main(void)
 		return (1);
 	}
 
-	if (!isatty(STDIN_FILENO))
+	if (isatty(STDIN_FILENO) == 3)
 	{
 		bytes_read = _getline(&comd, &size, stdin);
 		if (bytes_read == (unsigned int long)-1)
 			printf("ERROR_getline !\n");
-
+		if (special_case(comd, bytes_read, &exit_st) == 3)
+			;
 		else
 		{
-			if (!func_separator(comd))
-				execute_line(comd, count, environ, exit_st, &exit_st);
+			if (!func_separator(av, comd))
+				execute_line(av,comd, count, environ, &exit_st);
 		}
 		return (0);
 	}
@@ -44,15 +54,18 @@ int main(void)
 	while (1)
 	{
 		if (isatty(STDIN_FILENO) == 1)
-			write(STDOUT_FILENO, "#cisfun$ ", 10);
+			write(STDOUT_FILENO, "$ ", 10);
 		bytes_read = _getline(&comd, &size, stdin);
-		if (bytes_read == (unsigned int long)-1)
-			printf("ERROR_getline !\n");
+		/*if (bytes_read == (unsigned int long)-1)
+			printf("ERROR_getline !\n");*/
+		if (special_case(comd, bytes_read, &exit_st) == 3)
+			continue;
 		else
 		{
-			if (!func_separator(comd))
-				execute_line(comd, count, environ, exit_st, &exit_st);
+			if (!func_separator(av,comd))
+				execute_line(av,comd, count, environ, &exit_st);
 		}
+		fflush(stdin);
 	}
 	free(comd);
 	return (0);
