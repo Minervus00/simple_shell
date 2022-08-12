@@ -1,0 +1,28 @@
+==5527== Memcheck, a memory error detector
+==5527== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==5527== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==5527== Command: ./hsh
+==5527== Parent PID: 5510
+==5527== 
+==5527== 
+==5527== HEAP SUMMARY:
+==5527==     in use at exit: 71 bytes in 4 blocks
+==5527==   total heap usage: 11 allocs, 7 frees, 9,448 bytes allocated
+==5527== 
+==5527== 35 (32 direct, 3 indirect) bytes in 1 blocks are definitely lost in loss record 4 of 4
+==5527==    at 0x483B7F3: malloc (in /usr/lib/x86_64-linux-gnu/valgrind/vgpreload_memcheck-amd64-linux.so)
+==5527==    by 0x10AD8A: split_line (in /root/simple_shell/hsh)
+==5527==    by 0x10A0AE: execute_line (in /root/simple_shell/hsh)
+==5527==    by 0x10ABF1: main (in /root/simple_shell/hsh)
+==5527== 
+==5527== LEAK SUMMARY:
+==5527==    definitely lost: 32 bytes in 1 blocks
+==5527==    indirectly lost: 3 bytes in 1 blocks
+==5527==      possibly lost: 0 bytes in 0 blocks
+==5527==    still reachable: 36 bytes in 2 blocks
+==5527==         suppressed: 0 bytes in 0 blocks
+==5527== Reachable blocks (those to which a pointer was found) are not shown.
+==5527== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==5527== 
+==5527== For lists of detected and suppressed errors, rerun with: -s
+==5527== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)

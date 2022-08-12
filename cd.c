@@ -29,12 +29,25 @@ char **_getenvi(const char *var)
 	for (index = 0; environ[index]; index++)
 	{
 		if (_strncmp(var, environ[index], len) == 0)
+		{
 			return (&environ[index]);
+		}
 	}
 
 	return (NULL);
 }
+char *_getenva(const char *var)
+{
+	int index, len;
 
+	len = _strleni(var);
+	for (index = 0; environ[index]; index++)
+	{
+		if (_strncmp(var, environ[index], len) == 0)
+			return (environ[index]);
+	}
+	return (NULL);
+}
 /**
  * _strcat - Concantenates two strings.
  * @dest: Pointer to destination string.
@@ -71,27 +84,27 @@ char *_strcati(char *dest, const char *src)
  */
 int _setenv(char **args, char __attribute__((__unused__)) **front)
 {
-	char **env_var = NULL, **new_environ, *new_value;
+	char **env_var = NULL, **new_environ = NULL, *new_value = NULL;
 	size_t size;
 	int index;
 
 	if (!args[0] || !args[1])
-		return (0);
-
-	new_value = malloc(_strlen(args[0]) + 1 + _strlen(args[1]) + 1);
-	if (!new_value)
-		return (0);
-	_strcpy(new_value, args[0]);
-	_strcati(new_value, "=");
-	_strcati(new_value, args[1]);
+		return (-1);
 
 	env_var = _getenvi(args[0]);
 	if (env_var)
 	{
-		*env_var = new_value;
-        free(new_value);
+		_strcpy(*env_var, args[0]);
+		_strcati(*env_var, "=");
+		_strcati(*env_var, args[1]);
 		return (0);
 	}
+	new_value = malloc(_strlen(args[0]) + 1 + _strlen(args[1]) + 1);
+	if (!new_value)
+		return (-1);
+	_strcpy(new_value, args[0]);
+	_strcati(new_value, "=");
+	_strcati(new_value, args[1]);
 	for (size = 0; environ[size]; size++)
 		;
 
@@ -99,18 +112,15 @@ int _setenv(char **args, char __attribute__((__unused__)) **front)
 	if (!new_environ)
 	{
 		free(new_value);
-		return (0);
+		return (-1);
 	}
 
 	for (index = 0; environ[index]; index++)
 		new_environ[index] = environ[index];
 
-	free(environ);
 	environ = new_environ;
 	environ[index] = new_value;
 	environ[index + 1] = NULL;
-    free(new_value);
-    free_loop(new_environ);
 
 	return (0);
 }
@@ -189,6 +199,7 @@ int _cd(char **args)
 
 	free(oldpwd);
 	free(pwd);
-	free_loop(dir_info);
+	free(dir_info);
+	free_loop(args);
 	return (0);
 }
