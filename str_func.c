@@ -14,7 +14,7 @@ int _strlen(char *s)
 		return (len);
 }
 /**
- * _strtr - clone of strstr
+ * _strstr - clone of strstr
  * @hay: string to be scanned
  * @need: small string tobe searched in haystack
  *
