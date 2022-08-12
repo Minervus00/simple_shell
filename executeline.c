@@ -3,6 +3,7 @@
 /**
 *execute_line - function that executes a line
 *@comd: argument char-pointers array
+*@av: classic av
 *@count: count of commands that were run
 *@env: the environment
 *@exit_st: exit status
@@ -13,7 +14,7 @@ int execute_line(char **av, char *comd, int count,
 {
 	pid_t r_pid;
 	int status;
-    int exit_s = 0;
+	int exit_s = 0;
 	char *full_path = NULL, **argv;
 
 	argv = split_line(comd);
@@ -42,7 +43,7 @@ int execute_line(char **av, char *comd, int count,
 					execve(full_path, argv, env);
 			}
 			_error(av, argv[0], count, &exit_st);
-           		free(full_path);
+			free(full_path);
 			free_loop(argv);
 			free(comd);
 			exit(*exit_st);

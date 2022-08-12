@@ -36,20 +36,9 @@ char **_getenvi(const char *var)
 
 	return (NULL);
 }
-char *_getenva(const char *var)
-{
-	int index, len;
 
-	len = _strleni(var);
-	for (index = 0; environ[index]; index++)
-	{
-		if (_strncmp(var, environ[index], len) == 0)
-			return (environ[index]);
-	}
-	return (NULL);
-}
 /**
- * _strcat - Concantenates two strings.
+ * _strcati - Concantenates two strings.
  * @dest: Pointer to destination string.
  * @src: Pointer to source string.
  *

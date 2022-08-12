@@ -11,6 +11,7 @@ void print_error(void)
 
 /**
  * signal_handler - handle signals
+ * @signal: signal
  */
 void signal_handler(int signal __attribute__((unused)))
 {
@@ -18,6 +19,8 @@ void signal_handler(int signal __attribute__((unused)))
 }
 /**
  * main - the main function
+ * @ac: int
+ * @av: char **
  * Return: int
  */
 
@@ -28,30 +31,23 @@ int main(int ac, char **av)
 	int exit_st = 0;
 	(void)ac;
 
-	/*comd = malloc(size);
-	if (comd == NULL)
-	{
-		write(1, "Error !\n", 8);
-		return (1);
-	}*/
-
 	while (1)
 	{
 		if (isatty(STDIN_FILENO) == 1)
 			write(STDOUT_FILENO, "$ ", 3);
 		signal(SIGINT, signal_handler);
 		bytes_read = getline(&comd, &size, stdin);
-		/*if (bytes_read == (unsigned int long)-1)
-			printf("ERROR_getline !\n");*/
+
 		if (special_case(comd, bytes_read, &exit_st) == 3)
 			continue;
 		else
 		{
-			if (!func_separator(av,comd))
-				execute_line(av,comd, count, environ, &exit_st);
+			if (!func_separator(av, comd))
+				execute_line(av, comd, count, environ, &exit_st);
 		}
 		fflush(stdin);
 	}
 	free(comd);
 	return (exit_st);
 }
+
