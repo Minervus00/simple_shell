@@ -3,7 +3,7 @@
 /**
  * func_separator - manage ; || &&
  * @comd: the whole command
- *
+ * @av: av
  * Return: 0 if there are no separators, 1 otherwise
  */
 int func_separator(char **av, char *comd)
