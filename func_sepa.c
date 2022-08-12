@@ -16,35 +16,35 @@ int func_separator(char **av, char *comd)
 		if (_strstr(comd, sepa[i]))
 		{
 			tok = _strtok(comd, sepa[i]);
-			while (tok[0])
+			while (tok[j])
 			{
 				if (i == 0)
-					execute_line(av, tok[0], 1, environ, &h);
+					execute_line(av, tok[j], 1, environ, &h);
 				else if (i == 1)
 				{
 					 /**
 					  * Execute_line return 0 en cas de success
 					  * D'où en cas de succès on arrête l'exécution
 					  */
-					if (execute_line(av, tok[0], 1, environ, &h) == 0)
+					if (execute_line(av, tok[j], 1, environ, &h) == 0)
 					{
-						free_loop(tok);
 						return (1);
 					}
 				}
 				else
 				{
 					/*En cas d'erreur (execute_line return != 0) on arrête l'exécution*/
-					if (execute_line(av, tok[0], 1, environ, &h))
+					if (execute_line(av, tok[j], 1, environ, &h))
 					{
-						free_loop(tok);
 						return (1);
 					}
 				}
-				tok++;
+				free(tok[j]);
 				j++;
 			}
-			free_loop(tok);
+			free(tok[j]);
+			free(tok[j + 1]);
+			free(tok);
 			return (1);
 		}
 	}
