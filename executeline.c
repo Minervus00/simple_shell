@@ -42,7 +42,7 @@ int execute_line(char **av, char *comd, int count,
 					execve(full_path, argv, env);
 			}
 			_error(av, argv[0], count, &exit_st);
-            free(full_path);
+           		free(full_path);
 			free_loop(argv);
 			free(comd);
 			exit(*exit_st);
@@ -51,9 +51,17 @@ int execute_line(char **av, char *comd, int count,
 		{
 			wait(&status);
 			free_loop(argv);
-            *exit_st = WEXITSTATUS(status);
+			*exit_st = WEXITSTATUS(status);
 			if (*exit_st != 0)
+			{
+				if (*exit_st == 2)
+				{
+					free(full_path);
+					free(comd);
+					exit(*exit_st);
+				}
 				return (-1);
+			}
 		}
 	}
 	return (0);
